@@ -1,4 +1,17 @@
 User-agent: *
 Allow: /
 
+# AI crawlers — explicitly allowed (helps visibility in AI-driven search)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://mgondolini.github.io/sitemap.xml
