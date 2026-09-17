@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monica Gondolini — Full-Stack Developer</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg: #EFF2EE;
+    --ink: #171A17;
+    --muted: #5B655C;
+    --line: #CBD2C8;
+    --card: #FFFFFF;
+    --accent: #2E6F6B;
+    --accent-soft: #DCEBE9;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #14161A;
+      --ink: #EAEBE6;
+      --muted: #9AA39A;
+      --line: #2B2F2C;
+      --card: #1B1E1B;
+      --accent: #5FC2BB;
+      --accent-soft: #1C2E2C;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #14161A;
+    --ink: #EAEBE6;
+    --muted: #9AA39A;
+    --line: #2B2F2C;
+    --card: #1B1E1B;
+    --accent: #5FC2BB;
+    --accent-soft: #1C2E2C;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap{
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 6rem;
+  }
+
+  .mono{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+
+  .comment{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+    margin: 0 0 0.6rem;
+  }
+  .comment::before{ content: "// "; }
+
+  h1{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 700;
+    margin: 0 0 0.3rem;
+    line-height: 1.2;
+  }
+
+  .cursor{
+    display:inline-block;
+    width: 0.55ch;
+    background: var(--accent);
+    margin-left: 2px;
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{ 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce){ .cursor{ animation: none; } }
+
+  .role{
+    color: var(--muted);
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.95rem;
+    margin: 0 0 0.4rem;
+  }
+
+  .location{
+    color: var(--muted);
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.82rem;
+    margin: 0 0 2.6rem;
+  }
+
+  section{
+    border-top: 1px solid var(--line);
+    padding: 2.2rem 0;
+  }
+  section:first-of-type{ border-top: none; padding-top: 0; }
+
+  p{ margin: 0 0 1rem; max-width: 62ch; }
+  p:last-child{ margin-bottom: 0; }
+
+  .links{
+    display:flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 1.4rem;
+  }
+
+  .btn{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 0.65rem 1.1rem;
+    border-radius: 3px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover{ border-color: var(--accent); background: var(--accent-soft); }
+  .btn.primary{
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #08201E;
+  }
+  .btn.primary:hover{ opacity: 0.9; background: var(--accent); }
+
+  .cv-entry{
+    display:grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+  .cv-entry:last-child{ margin-bottom: 0; }
+  .cv-when{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.76rem;
+    color: var(--muted);
+    padding-top: 0.2rem;
+  }
+  .cv-what h3{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 0 0.1rem;
+  }
+  .cv-what .org{
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .cv-what ul{
+    margin: 0.4rem 0 0;
+    padding-left: 1.1rem;
+  }
+  .cv-what li{
+    font-size: 0.96rem;
+    margin-bottom: 0.3rem;
+  }
+
+  @media (max-width: 480px){
+    .cv-entry{ grid-template-columns: 1fr; gap: 0.2rem; }
+  }
+
+  .skill-group{ margin-bottom: 1.3rem; }
+  .skill-group:last-child{ margin-bottom: 0; }
+  .skill-group h3{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 500;
+    margin: 0 0 0.5rem;
+  }
+  .skills{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .skills li{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.78rem;
+    border: 1px solid var(--line);
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    color: var(--ink);
+    background: var(--card);
+  }
+
+  .langs{
+    display:flex;
+    gap: 2rem;
+  }
+  .langs div{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 0.9rem; }
+  .langs span{ display:block; color: var(--muted); font-size: 0.78rem; margin-top: 0.2rem; }
+
+  footer{
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  a.inline{ color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Monica Gondolini<span class="cursor">&nbsp;</span></h1>
+  <p class="role">Full-Stack Developer</p>
+  <p class="location">Bologna · Forlì</p>
+
+  <section>
+    <p class="comment">about</p>
+    <p>Full-Stack Developer con oltre 5 anni di esperienza nella progettazione e sviluppo di API REST e GraphQL in Go, nella gestione di database MongoDB e MySQL e nell'orchestrazione di container con Docker e Kubernetes.</p>
+    <p>Esperienza consolidata nello sviluppo di piattaforme digitali end-to-end, backend e frontend con Vue.js e Node.js, sia in autonomia sia in team. Curiosa e orientata all'aggiornamento continuo, con basi accademiche in Big Data e Machine Learning.</p>
+  </section>
+
+  <section>
+    <p class="comment">contatti</p>
+    <div class="links">
+      <a class="btn" href="https://www.linkedin.com/in/monica-gondolini" target="_blank" rel="noopener">linkedin.com/in/monica-gondolini ↗</a>
+      <a class="btn" href="mailto:monica.gondolini@gmail.com">monica.gondolini@gmail.com</a>
+      <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">scarica il cv ↓</a>
+    </div>
+  </section>
+
+  <section id="esperienza">
+    <p class="comment">esperienza</p>
+
+    <div class="cv-entry">
+      <div class="cv-when">Feb 2021 — Giu 2026</div>
+      <div class="cv-what">
+        <h3>Full-Stack Developer</h3>
+        <div class="org">Search On Media Group</div>
+        <ul>
+          <li>Sviluppo di gestionali per eventi di formazione e di un'applicazione web dedicata ai partecipanti</li>
+          <li>Progettazione e sviluppo di API REST in Go con database MongoDB e MySQL</li>
+          <li>Utilizzo di goroutine per la gestione concorrente ed efficiente dei processi</li>
+          <li>Creazione e gestione di immagini Docker e orchestrazione dei container con Kubernetes (K8s)</li>
+          <li>Implementazione full-stack con MongoDB, Apollo GraphQL, Vue.js e Node.js; backend basato su gqlgen</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-when">Set 2019 — Mag 2022</div>
+      <div class="cv-what">
+        <h3>Software Developer</h3>
+        <div class="org">Freelance</div>
+        <ul>
+          <li>Progettazione e sviluppo in Java e JavaFX di un'applicazione desktop per l'analisi dello stato di carica delle batterie dei muletti a partire da file CSV, con individuazione e visualizzazione tramite grafici e tabelle delle cariche anomale</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-when">Apr 2017 — Giu 2017</div>
+      <div class="cv-what">
+        <h3>Sviluppatore WordPress</h3>
+        <div class="org">MLS s.l.u</div>
+        <ul>
+          <li>Sviluppo e personalizzazione di pagine e plugin WordPress con JavaScript, CSS, HTML</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-when">Ott 2015</div>
+      <div class="cv-what">
+        <h3>Sviluppatore WordPress</h3>
+        <div class="org">Emmebistudio</div>
+        <ul>
+          <li>Sviluppo e modifica di pagine WordPress e CRM con Laravel, PHP, HTML, CSS, MySQL</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="istruzione">
+    <p class="comment">istruzione</p>
+    <div class="cv-entry">
+      <div class="cv-when">2013 — 2016</div>
+      <div class="cv-what">
+        <h3>Laurea Triennale in Ingegneria e Scienze Informatiche</h3>
+        <div class="org">Università di Bologna</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="competenze">
+    <p class="comment">competenze</p>
+
+    <div class="skill-group">
+      <h3>linguaggi &amp; tecnologie</h3>
+      <ul class="skills">
+        <li>Go</li><li>Java</li><li>Scala</li><li>JavaScript</li><li>TypeScript</li><li>SQL</li><li>R</li><li>Python</li>
+        <li>Vue.js</li><li>Node.js</li><li>HTML</li><li>CSS</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>backend &amp; infrastruttura</h3>
+      <ul class="skills">
+        <li>API REST</li><li>GraphQL (Apollo, gqlgen)</li><li>Goroutine</li>
+        <li>MongoDB</li><li>MySQL</li><li>Docker</li><li>Kubernetes</li>
+        <li>Git</li><li>Linux</li><li>Bash</li><li>WSL</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>AI &amp; sviluppo assistito</h3>
+      <ul class="skills">
+        <li>Prompt engineering</li><li>AI-assisted coding</li><li>Claude Code</li><li>Gemini</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>data &amp; AI — basi accademiche</h3>
+      <ul class="skills">
+        <li>Big Data</li><li>Machine Learning</li><li>Data Science</li><li>Apache Spark</li><li>Business Intelligence</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>soft skills</h3>
+      <ul class="skills">
+        <li>Lavoro autonomo e in team</li><li>Problem solving</li><li>Adattabilità e flessibilità</li><li>Affidabilità e precisione</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="lingue">
+    <p class="comment">lingue</p>
+    <div class="langs">
+      <div>Italiano<span>Madrelingua</span></div>
+      <div>Inglese<span>B2</span></div>
+    </div>
+  </section>
+
+  <footer>
+    ultimo aggiornamento — 2026
+  </footer>
+
+</div>
+</body>
+</html>
