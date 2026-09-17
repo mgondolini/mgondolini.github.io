@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +43,10 @@
 
   *{ box-sizing: border-box; }
 
+  /* language toggle logic */
+  html[data-lang="en"] .it{ display:none; }
+  html[data-lang="it"] .en{ display:none; }
+
   body{
     margin:0;
     background: var(--bg);
@@ -56,10 +60,37 @@
   .wrap{
     max-width: 680px;
     margin: 0 auto;
-    padding: 5rem 1.5rem 6rem;
+    padding: 4rem 1.5rem 6rem;
+    position: relative;
   }
 
   .mono{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+
+  .langswitch{
+    position: absolute;
+    top: 4rem;
+    right: 1.5rem;
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.78rem;
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+  }
+  .langswitch button{
+    font-family: inherit;
+    font-size: inherit;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    padding: 0.3rem 0.55rem;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .langswitch button[aria-current="true"]{
+    color: var(--ink);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
 
   .comment{
     font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -74,7 +105,7 @@
     font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
     font-size: clamp(1.8rem, 5vw, 2.6rem);
     font-weight: 700;
-    margin: 0 0 0.3rem;
+    margin: 1.2rem 0 0.3rem;
     line-height: 1.2;
   }
 
@@ -171,6 +202,7 @@
 
   @media (max-width: 480px){
     .cv-entry{ grid-template-columns: 1fr; gap: 0.2rem; }
+    .langswitch{ position: static; justify-content: flex-end; margin-bottom: 1rem; }
   }
 
   .skill-group{ margin-bottom: 1.3rem; }
@@ -222,34 +254,54 @@
 <body>
 <div class="wrap">
 
+  <div class="langswitch" role="group" aria-label="Language">
+    <button type="button" data-set-lang="en" aria-current="true">EN</button>
+    <button type="button" data-set-lang="it" aria-current="false">IT</button>
+  </div>
+
   <h1>Monica Gondolini<span class="cursor">&nbsp;</span></h1>
   <p class="role">Full-Stack Developer</p>
   <p class="location">Bologna · Forlì</p>
 
   <section>
-    <p class="comment">about</p>
-    <p>Full-Stack Developer con oltre 5 anni di esperienza nella progettazione e sviluppo di API REST e GraphQL in Go, nella gestione di database MongoDB e MySQL e nell'orchestrazione di container con Docker e Kubernetes.</p>
-    <p>Esperienza consolidata nello sviluppo di piattaforme digitali end-to-end, backend e frontend con Vue.js e Node.js, sia in autonomia sia in team. Curiosa e orientata all'aggiornamento continuo, con basi accademiche in Big Data e Machine Learning.</p>
-  </section>
-
-  <section>
-    <p class="comment">contatti</p>
-    <div class="links">
-      <a class="btn" href="https://www.linkedin.com/in/monica-gondolini" target="_blank" rel="noopener">linkedin.com/in/monica-gondolini ↗</a>
-      <a class="btn" href="mailto:monica.gondolini@gmail.com">monica.gondolini@gmail.com</a>
-      <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">scarica il cv ↓</a>
+    <p class="comment"><span class="en">about</span><span class="it">chi sono</span></p>
+    <div class="en">
+      <p>Full-Stack Developer with 5+ years of experience designing and building REST and GraphQL APIs in Go, managing MongoDB and MySQL databases, and orchestrating containers with Docker and Kubernetes.</p>
+      <p>Solid track record building end-to-end digital platforms — backend and frontend with Vue.js and Node.js — both independently and within a team. Curious and committed to continuous learning, with an academic background in Big Data and Machine Learning.</p>
+    </div>
+    <div class="it">
+      <p>Full-Stack Developer con oltre 5 anni di esperienza nella progettazione e sviluppo di API REST e GraphQL in Go, nella gestione di database MongoDB e MySQL e nell'orchestrazione di container con Docker e Kubernetes.</p>
+      <p>Esperienza consolidata nello sviluppo di piattaforme digitali end-to-end, backend e frontend con Vue.js e Node.js, sia in autonomia sia in team. Curiosa e orientata all'aggiornamento continuo, con basi accademiche in Big Data e Machine Learning.</p>
     </div>
   </section>
 
-  <section id="esperienza">
-    <p class="comment">esperienza</p>
+  <section>
+    <p class="comment"><span class="en">contact</span><span class="it">contatti</span></p>
+    <div class="links">
+      <a class="btn" href="https://www.linkedin.com/in/monica-gondolini" target="_blank" rel="noopener">linkedin.com/in/monica-gondolini ↗</a>
+      <a class="btn" href="mailto:monica.gondolini@gmail.com">monica.gondolini@gmail.com</a>
+      <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">
+        <span class="en">download cv ↓</span><span class="it">scarica il cv ↓</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="experience">
+    <p class="comment"><span class="en">experience</span><span class="it">esperienza</span></p>
 
     <div class="cv-entry">
-      <div class="cv-when">Feb 2021 — Giu 2026</div>
+      <div class="cv-when">Feb 2021 — Jun 2026</div>
       <div class="cv-what">
         <h3>Full-Stack Developer</h3>
         <div class="org">Search On Media Group</div>
-        <ul>
+        <ul class="en">
+          <li>Development of management systems for training events and a web application for participants</li>
+          <li>Design and development of REST APIs in Go with MongoDB and MySQL databases</li>
+          <li>Use of goroutines for efficient concurrent process handling</li>
+          <li>Creation and management of Docker images and container orchestration with Kubernetes (K8s)</li>
+          <li>Full-stack implementation with MongoDB, Apollo GraphQL, Vue.js and Node.js; backend based on gqlgen</li>
+        </ul>
+        <ul class="it">
           <li>Sviluppo di gestionali per eventi di formazione e di un'applicazione web dedicata ai partecipanti</li>
           <li>Progettazione e sviluppo di API REST in Go con database MongoDB e MySQL</li>
           <li>Utilizzo di goroutine per la gestione concorrente ed efficiente dei processi</li>
@@ -260,55 +312,67 @@
     </div>
 
     <div class="cv-entry">
-      <div class="cv-when">Set 2019 — Mag 2022</div>
+      <div class="cv-when">Sep 2019 — May 2022</div>
       <div class="cv-what">
-        <h3>Software Developer</h3>
+        <h3><span class="en">Software Developer</span><span class="it">Software Developer</span></h3>
         <div class="org">Freelance</div>
-        <ul>
+        <ul class="en">
+          <li>Designed and developed a Java/JavaFX desktop application for analyzing forklift battery charge status from CSV files, detecting and visualizing anomalous or incorrect charges through charts and tables</li>
+        </ul>
+        <ul class="it">
           <li>Progettazione e sviluppo in Java e JavaFX di un'applicazione desktop per l'analisi dello stato di carica delle batterie dei muletti a partire da file CSV, con individuazione e visualizzazione tramite grafici e tabelle delle cariche anomale</li>
         </ul>
       </div>
     </div>
 
     <div class="cv-entry">
-      <div class="cv-when">Apr 2017 — Giu 2017</div>
+      <div class="cv-when">Apr 2017 — Jun 2017</div>
       <div class="cv-what">
-        <h3>Sviluppatore WordPress</h3>
+        <h3>WordPress Developer</h3>
         <div class="org">MLS s.l.u</div>
-        <ul>
+        <ul class="en">
+          <li>Development and customization of WordPress pages and plugins with JavaScript, CSS, HTML</li>
+        </ul>
+        <ul class="it">
           <li>Sviluppo e personalizzazione di pagine e plugin WordPress con JavaScript, CSS, HTML</li>
         </ul>
       </div>
     </div>
 
     <div class="cv-entry">
-      <div class="cv-when">Ott 2015</div>
+      <div class="cv-when">Oct 2015</div>
       <div class="cv-what">
-        <h3>Sviluppatore WordPress</h3>
+        <h3>WordPress Developer</h3>
         <div class="org">Emmebistudio</div>
-        <ul>
+        <ul class="en">
+          <li>Development and editing of WordPress pages and CRM with Laravel, PHP, HTML, CSS, MySQL</li>
+        </ul>
+        <ul class="it">
           <li>Sviluppo e modifica di pagine WordPress e CRM con Laravel, PHP, HTML, CSS, MySQL</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section id="istruzione">
-    <p class="comment">istruzione</p>
+  <section id="education">
+    <p class="comment"><span class="en">education</span><span class="it">istruzione</span></p>
     <div class="cv-entry">
       <div class="cv-when">2013 — 2016</div>
       <div class="cv-what">
-        <h3>Laurea Triennale in Ingegneria e Scienze Informatiche</h3>
-        <div class="org">Università di Bologna</div>
+        <h3>
+          <span class="en">Bachelor's Degree in Computer Engineering and Science</span>
+          <span class="it">Laurea Triennale in Ingegneria e Scienze Informatiche</span>
+        </h3>
+        <div class="org"><span class="en">University of Bologna</span><span class="it">Università di Bologna</span></div>
       </div>
     </div>
   </section>
 
-  <section id="competenze">
-    <p class="comment">competenze</p>
+  <section id="skills">
+    <p class="comment"><span class="en">skills</span><span class="it">competenze</span></p>
 
     <div class="skill-group">
-      <h3>linguaggi &amp; tecnologie</h3>
+      <h3><span class="en">languages &amp; technologies</span><span class="it">linguaggi &amp; tecnologie</span></h3>
       <ul class="skills">
         <li>Go</li><li>Java</li><li>Scala</li><li>JavaScript</li><li>TypeScript</li><li>SQL</li><li>R</li><li>Python</li>
         <li>Vue.js</li><li>Node.js</li><li>HTML</li><li>CSS</li>
@@ -316,48 +380,78 @@
     </div>
 
     <div class="skill-group">
-      <h3>backend &amp; infrastruttura</h3>
+      <h3><span class="en">backend &amp; infrastructure</span><span class="it">backend &amp; infrastruttura</span></h3>
       <ul class="skills">
-        <li>API REST</li><li>GraphQL (Apollo, gqlgen)</li><li>Goroutine</li>
+        <li>REST APIs</li><li>GraphQL (Apollo, gqlgen)</li><li>Goroutines</li>
         <li>MongoDB</li><li>MySQL</li><li>Docker</li><li>Kubernetes</li>
         <li>Git</li><li>Linux</li><li>Bash</li><li>WSL</li>
       </ul>
     </div>
 
     <div class="skill-group">
-      <h3>AI &amp; sviluppo assistito</h3>
+      <h3><span class="en">AI &amp; assisted development</span><span class="it">AI &amp; sviluppo assistito</span></h3>
       <ul class="skills">
-        <li>Prompt engineering</li><li>AI-assisted coding</li><li>Claude Code</li><li>Gemini</li>
+        <li><span class="en">Prompt engineering</span><span class="it">Prompt engineering</span></li>
+        <li>AI-assisted coding</li><li>Claude Code</li><li>Gemini</li>
       </ul>
     </div>
 
     <div class="skill-group">
-      <h3>data &amp; AI — basi accademiche</h3>
+      <h3><span class="en">data &amp; AI — academic background</span><span class="it">data &amp; AI — basi accademiche</span></h3>
       <ul class="skills">
         <li>Big Data</li><li>Machine Learning</li><li>Data Science</li><li>Apache Spark</li><li>Business Intelligence</li>
       </ul>
     </div>
 
     <div class="skill-group">
-      <h3>soft skills</h3>
-      <ul class="skills">
+      <h3>Soft skills</h3>
+      <ul class="skills en">
+        <li>Independent &amp; team work</li><li>Problem solving</li><li>Adaptability</li><li>Reliability &amp; attention to detail</li>
+      </ul>
+      <ul class="skills it">
         <li>Lavoro autonomo e in team</li><li>Problem solving</li><li>Adattabilità e flessibilità</li><li>Affidabilità e precisione</li>
       </ul>
     </div>
   </section>
 
-  <section id="lingue">
-    <p class="comment">lingue</p>
+  <section id="languages">
+    <p class="comment"><span class="en">languages</span><span class="it">lingue</span></p>
     <div class="langs">
-      <div>Italiano<span>Madrelingua</span></div>
-      <div>Inglese<span>B2</span></div>
+      <div><span class="en">Italian</span><span class="it">Italiano</span><span><span class="en">Native</span><span class="it">Madrelingua</span></span></div>
+      <div><span class="en">English</span><span class="it">Inglese</span><span>B2</span></div>
     </div>
   </section>
 
   <footer>
-    ultimo aggiornamento — 2026
+    <span class="en">last updated — 2026</span><span class="it">ultimo aggiornamento — 2026</span>
   </footer>
 
 </div>
+
+<script>
+  (function(){
+    var html = document.documentElement;
+    var buttons = document.querySelectorAll('[data-set-lang]');
+
+    function apply(lang){
+      html.setAttribute('data-lang', lang);
+      try { localStorage.setItem('site-lang', lang); } catch(e) {}
+      buttons.forEach(function(b){
+        b.setAttribute('aria-current', b.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+      });
+    }
+
+    buttons.forEach(function(b){
+      b.addEventListener('click', function(){ apply(b.getAttribute('data-set-lang')); });
+    });
+
+    var saved = null;
+    try { saved = localStorage.getItem('site-lang'); } catch(e) {}
+    if (!saved) {
+      saved = (navigator.language || '').toLowerCase().indexOf('it') === 0 ? 'it' : 'en';
+    }
+    apply(saved);
+  })();
+</script>
 </body>
 </html>
