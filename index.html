@@ -78,7 +78,8 @@
     "Go (Golang)", "GraphQL", "gqlgen", "Apollo GraphQL", "REST API design",
     "Vue.js", "Node.js", "TypeScript", "MongoDB", "MySQL",
     "Docker", "Kubernetes", "Concurrency", "Java", "Scala",
-    "Machine Learning", "Apache Spark", "Big Data"
+    "Machine Learning", "Apache Spark", "Big Data",
+    "Continuous Integration", "Agile software development", "Distributed systems"
   ],
   "seeks": { "@type": "Demand", "name": "Full-Stack Developer and Backend Developer roles" },
   "sameAs": [
@@ -164,8 +165,19 @@ img{max-width:100%;height:auto}
 @media(max-width:760px){.topbar nav ul{display:none}}
 
 /* ---------- hero ---------- */
-.hero{padding:3rem 0 2.2rem;display:grid;grid-template-columns:1fr 150px;gap:2rem;align-items:start;border-bottom:2px solid var(--edge)}
-@media(max-width:640px){.hero{grid-template-columns:1fr;gap:1.4rem}}
+.hero{padding:3rem 0 2.2rem;border-bottom:2px solid var(--edge)}
+.hero-main{display:grid;grid-template-columns:1fr 150px;gap:2rem;align-items:start}
+.hero-head{grid-column:1;grid-row:1}
+.portrait{grid-column:2;grid-row:1}
+.hero-actions{margin-top:1.5rem}
+@media(max-width:700px){
+  .hero{padding:2.2rem 0 1.8rem}
+  .hero-main{grid-template-columns:104px 1fr;gap:1.1rem;align-items:start}
+  .hero-head{grid-column:2;grid-row:1}
+  .portrait{grid-column:1;grid-row:1}
+  .hero-actions{margin-top:1.3rem}
+}
+@media(max-width:400px){.hero-main{grid-template-columns:82px 1fr;gap:.9rem}}
 
 .status{display:inline-flex;align-items:center;gap:.5rem;font-family:"Space Mono",monospace;font-size:.72rem;font-weight:700;background:var(--green);color:var(--green-ink);padding:.3rem .65rem;margin-bottom:1.15rem}
 .status i{width:6px;height:6px;background:var(--green-ink);display:block}
@@ -175,8 +187,14 @@ h1{color:var(--bright);font-size:clamp(2.05rem,6.8vw,3.3rem);font-weight:700;lin
 .sub strong{color:var(--ink);font-weight:500}
 .sub .hl{color:var(--green);font-weight:500}
 
-.portrait{width:150px;height:184px;object-fit:cover;border:2px solid var(--edge)}
-@media(max-width:640px){.portrait{width:112px;height:136px}}
+.portrait{width:150px;height:184px;object-fit:cover;border:2px solid var(--edge);filter:grayscale(1) contrast(1.08) brightness(.95)}
+@media(max-width:700px){
+  .portrait{width:104px;height:128px}
+  h1{font-size:clamp(1.35rem,5.4vw,1.85rem);line-height:1.1;margin-bottom:.55rem}
+  .status{font-size:.65rem;padding:.24rem .5rem;margin-bottom:.7rem}
+  .sub{font-size:.93rem;margin-bottom:0}
+}
+@media(max-width:400px){.portrait{width:82px;height:102px}}
 
 .btns{display:flex;gap:0;flex-wrap:wrap}
 .btn{font-family:"Space Mono",monospace;font-size:.79rem;text-decoration:none;color:var(--ink);border:2px solid var(--edge);padding:.6rem 1.1rem;margin:0 -2px -2px 0;background:transparent}
@@ -253,6 +271,45 @@ details p{margin:.6rem 0 0;font-size:.9rem;color:var(--dim)}
 .midcta{border:2px solid var(--green);padding:1.2rem 1.4rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1.6rem}
 .midcta p{margin:0;font-size:.92rem;font-weight:500;color:var(--bright)}
 
+
+/* ---------- mobile drawer ---------- */
+.menu-btn{
+  display:none;align-items:center;justify-content:center;gap:4px;flex-direction:column;
+  width:38px;height:34px;background:transparent;border:2px solid var(--edge);cursor:pointer;padding:0;
+}
+.menu-btn span{display:block;width:16px;height:2px;background:var(--green)}
+.menu-btn:hover{border-color:var(--green)}
+@media(max-width:760px){.menu-btn{display:inline-flex}}
+
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:30;
+  opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease;
+}
+.overlay[data-open="true"]{opacity:1;visibility:visible}
+
+.drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:min(80vw,320px);
+  background:var(--panel);border-left:2px solid var(--edge);z-index:40;
+  transform:translateX(100%);visibility:hidden;
+  transition:transform .25s ease,visibility .25s ease;
+  display:flex;flex-direction:column;padding:1rem 1.2rem 2rem;overflow-y:auto;
+}
+.drawer[data-open="true"]{transform:translateX(0);visibility:visible}
+.drawer-top{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--edge);padding-bottom:.7rem;margin-bottom:1.2rem}
+.drawer-top span{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--dim)}
+.drawer-close{background:transparent;border:2px solid var(--edge);color:var(--green);font-family:"Space Mono",monospace;font-size:.85rem;line-height:1;padding:.35rem .6rem;cursor:pointer}
+.drawer-close:hover{border-color:var(--green)}
+.drawer nav ul{list-style:none;margin:0 0 1.6rem;padding:0;display:flex;flex-direction:column}
+.drawer nav a{
+  display:block;font-family:"Space Mono",monospace;font-size:1rem;font-weight:700;
+  color:var(--bright);text-decoration:none;text-transform:uppercase;
+  padding:.75rem 0;border-bottom:1px solid var(--rule);
+}
+.drawer nav a::before{content:"> ";color:var(--green)}
+.drawer nav a:hover{color:var(--green)}
+.drawer .drawer-cta{display:flex;flex-direction:column;gap:0;margin-top:auto}
+.drawer .drawer-cta .btn{text-align:center;margin:0 0 -2px 0}
+
 /* ---------- footer ---------- */
 footer{padding:1.7rem 0 3rem;font-family:"Space Mono",monospace;font-size:.71rem;color:var(--dim)}
 footer a{color:var(--dim)}
@@ -274,18 +331,54 @@ footer a:hover{color:var(--green)}
         <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
-    <a class="hire" href="#contact">HIRE ME</a>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <a class="hire" href="#contact">HIRE ME</a>
+      <button class="menu-btn" type="button" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
+
+<div class="overlay" id="overlay" data-open="false" hidden></div>
+
+<aside class="drawer" id="drawer" data-open="false" aria-label="Site menu" aria-hidden="true">
+  <div class="drawer-top">
+    <span>MENU</span>
+    <button class="drawer-close" type="button" id="drawerClose" aria-label="Close menu">&#10005;</button>
+  </div>
+  <nav aria-label="Mobile navigation">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="drawer-cta">
+    <a class="btn btn-p" href="mailto:monica.gondolini@gmail.com?subject=Opportunity%20for%20Monica%20Gondolini">EMAIL ME</a>
+    <a class="btn" href="cv.pdf" target="_blank" rel="noopener">DOWNLOAD CV</a>
+    <a class="btn" href="https://www.linkedin.com/in/monica-gondolini" target="_blank" rel="noopener">LINKEDIN</a>
+    <a class="btn" href="https://github.com/mgondolini" target="_blank" rel="noopener">GITHUB</a>
+  </div>
+</aside>
 
 <main id="main">
 <div class="wrap" id="top">
 
   <div class="hero">
-    <div>
-      <p class="status"><i aria-hidden="true"></i> OPEN TO NEW OPPORTUNITIES</p>
-      <h1>Monica Gondolini<br>Full-Stack Developer</h1>
-      <p class="sub">Production backends in <span class="hl">Go</span> and <span class="hl">GraphQL</span>. <strong>Vue.js</strong> frontends. Shipped on <strong>Docker</strong> and <strong>Kubernetes</strong>. 5+ years, Bologna, Italy.</p>
+    <div class="hero-main">
+      <div class="hero-head">
+        <p class="status"><i aria-hidden="true"></i> OPEN TO NEW OPPORTUNITIES</p>
+        <h1>Monica Gondolini<br>Full-Stack Developer</h1>
+        <p class="sub">Production backends in <span class="hl">Go</span> and <span class="hl">GraphQL</span>. <strong>Vue.js</strong> frontends. Shipped on <strong>Docker</strong> and <strong>Kubernetes</strong>. 5+ years, Bologna, Italy.</p>
+      </div>
+      <img class="portrait" src="assets/monica-gondolini.jpg" width="150" height="184"
+           alt="Monica Gondolini, Full-Stack Developer based in Bologna, Italy" loading="eager">
+    </div>
+    <div class="hero-actions">
       <div class="btns">
         <a class="btn btn-p" href="mailto:monica.gondolini@gmail.com?subject=Opportunity%20for%20Monica%20Gondolini">EMAIL ME</a>
         <a class="btn" href="cv.pdf" target="_blank" rel="noopener">DOWNLOAD CV</a>
@@ -297,8 +390,6 @@ footer a:hover{color:var(--green)}
         <span>IT NATIVE · EN B2</span>
       </p>
     </div>
-    <img class="portrait" src="assets/monica-gondolini.jpg" width="150" height="184"
-         alt="Monica Gondolini, Full-Stack Developer based in Bologna, Italy" loading="eager">
   </div>
 
   <div class="stats">
@@ -356,7 +447,7 @@ monica := Engineer{
 
         <div class="grp">
           <p>INFRASTRUCTURE &amp; DEVOPS</p>
-          <ul class="pills"><li>Docker</li><li>Kubernetes</li><li>Git</li><li>Linux</li><li>Bash</li><li>WSL</li></ul>
+          <ul class="pills"><li>Docker</li><li>Kubernetes</li><li>CI/CD</li><li>Git</li><li>Gradle</li><li>Linux</li><li>Bash</li><li>WSL</li></ul>
         </div>
 
         <div class="grp">
@@ -464,19 +555,34 @@ monica := Engineer{
             <ul class="t"><li>Vue.js</li><li>Node.js</li><li>REST</li><li>CI/CD</li><li>Teamwork</li></ul>
             <a href="https://github.com/T0-B1/AssistenteNutrizionaleEcosostenibile" target="_blank" rel="noopener">VIEW REPO →</a>
           </article>
- 
+
           <article class="card">
             <h3>CML — Distributed Scala Platform</h3>
             <p>Four-person Scala project split into client, server and remote modules communicating over a network. Built with Gradle, kept honest by Travis CI, Scalastyle linting and Scoverage coverage reports, and run as an agile process with a maintained backlog. 600+ commits.</p>
             <ul class="t"><li>Scala</li><li>DistributedSystems</li><li>Gradle</li><li>TravisCI</li><li>Agile</li></ul>
             <a href="https://github.com/teamPPS/PPS-17-cml" target="_blank" rel="noopener">VIEW REPO →</a>
           </article>
- 
+
           <article class="card">
             <h3>Battery Analytics</h3>
-            <p>Java/JavaFX tool that parses forklift battery charge logs from CSV and flags anomalous or incorrect charging cycles, with chart and table views for operators.</p>
+            <p>Java/JavaFX tool that parses forklift battery charge logs from CSV and flags anomalous or incorrect charging cycles, with chart and table views so operators can act on them directly.</p>
             <ul class="t"><li>Java</li><li>JavaFX</li><li>DataAnalysis</li></ul>
           </article>
+
+          <article class="card">
+            <h3>Pressbooks Metadata</h3>
+            <p>Extended metadata features for a Pressbooks installation, built as a WordPress plugin with additional functionality for the Lingua theme.</p>
+            <ul class="t"><li>PHP</li><li>WordPress</li></ul>
+            <a href="https://github.com/mgondolini/Pressbooks-Metadata" target="_blank" rel="noopener">VIEW REPO →</a>
+          </article>
+
+          <article class="card">
+            <h3>PressBooks LinguaBooks</h3>
+            <p>Metadata handling and child theme for a multilingual PressBooks installation.</p>
+            <ul class="t"><li>PHP</li><li>Theming</li></ul>
+            <a href="https://github.com/mgondolini/PressBooks-LinguaBooks" target="_blank" rel="noopener">VIEW REPO →</a>
+          </article>
+
           <article class="card">
             <h3>Concurrent Chat</h3>
             <p>Multi-client chat exploring concurrent and distributed programming patterns in Java, with message coordination between clients.</p>
@@ -494,9 +600,9 @@ monica := Engineer{
       <div>
         <h2 id="h-faq">Questions recruiters ask</h2>
         <details><summary>What kind of roles are you looking for?</summary><p>Full-stack and backend engineering roles where Go, GraphQL and Kubernetes are central to the work. I'm most useful on teams building platforms that need to hold up in production, not just demos.</p></details>
-        <details><summary>Are you available for remote work?</summary><p>Yes. I'm based in Bologna and open to remote or hybrid positions across Italy and the EU.</p></details>
+        <details><summary>Are you available for remote work?</summary><p>Yes. I'm based in Bologna and open to remote, hybrid or on-site positions across Italy and the EU.</p></details>
         <details><summary>What's your strongest area?</summary><p>Go backend services — designing REST and GraphQL APIs, handling concurrency with goroutines, and shipping them as containerised workloads on Kubernetes.</p></details>
-        <details><summary>How do you work with a team?</summary><p>I've delivered modules both independently and as part of a shared codebase. I'm comfortable owning a piece of work end to end and equally comfortable reviewing, pairing and picking up someone else's context.</p></details>
+        <details><summary>How do you work with a team?</summary><p>I've delivered modules both independently and as part of a shared codebase, including two multi-person university projects run with proper branching, pull-request review and a maintained backlog. I'm comfortable owning a piece of work end to end and equally comfortable reviewing, pairing and picking up someone else's context.</p></details>
         <details><summary>What's your English level?</summary><p>B2 — comfortable in written technical communication, documentation, code review and day-to-day meetings.</p></details>
       </div>
     </div>
@@ -529,5 +635,49 @@ monica := Engineer{
     · NO TRACKERS, NO COOKIES
   </div>
 </footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('menuBtn');
+  var drawer = document.getElementById('drawer');
+  var overlay = document.getElementById('overlay');
+  var closeBtn = document.getElementById('drawerClose');
+  if(!btn || !drawer || !overlay) return;
+
+  function open(){
+    overlay.hidden = false;
+    requestAnimationFrame(function(){
+      drawer.setAttribute('data-open','true');
+      overlay.setAttribute('data-open','true');
+    });
+    drawer.setAttribute('aria-hidden','false');
+    btn.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function close(){
+    drawer.setAttribute('data-open','false');
+    overlay.setAttribute('data-open','false');
+    drawer.setAttribute('aria-hidden','true');
+    btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+    setTimeout(function(){ overlay.hidden = true; }, 250);
+    btn.focus();
+  }
+
+  btn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+  drawer.addEventListener('click', function(e){
+    if(e.target.tagName === 'A') close();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && drawer.getAttribute('data-open') === 'true') close();
+  });
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 760 && drawer.getAttribute('data-open') === 'true') close();
+  });
+})();
+</script>
 </body>
 </html>
